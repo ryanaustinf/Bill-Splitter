@@ -14,7 +14,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    public static MainActivity instance;
+    public static MainActivity instance = null;
+    private static MealAdapter MA = null;
+    private static PersonAdapter PA = null;
+
     private Button mealButton;
     private Button addButton;
     private EditText personNameField;
@@ -36,15 +39,28 @@ public class MainActivity extends AppCompatActivity {
         personNameField = (EditText)findViewById(R.id.personNameField);
         personView = (RecyclerView)findViewById(R.id.personView);
 
-        pa = new PersonAdapter(new OnClickListener() {
-            @Override
-            public void click(Person p) {
-                activePerson = p;
-                Intent editPerson = new Intent(getBaseContext(),EditPersonActivity.class);
-                startActivity(editPerson);
-            }
-        });
-        ma = new MealAdapter();
+        ma = MA;
+        pa = PA;
+        if( ma == null && pa == null ) {
+            pa = new PersonAdapter(new OnClickListener() {
+                @Override
+                public void click(Person p) {
+                    activePerson = p;
+                    Intent editPerson = new Intent(getBaseContext(), EditPersonActivity.class);
+                    startActivity(editPerson);
+                }
+            });
+            ma = new MealAdapter();
+        } else {
+            pa.setListener(new OnClickListener() {
+                @Override
+                public void click(Person p) {
+                    activePerson = p;
+                    Intent editPerson = new Intent(getBaseContext(), EditPersonActivity.class);
+                    startActivity(editPerson);
+                }
+            });
+        }
         personView.setAdapter(pa);
         personView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
 
@@ -68,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("MainActivity", "Saving shit");
+        MA = ma;
+        PA = pa;
     }
 
     public void deleteActive() {

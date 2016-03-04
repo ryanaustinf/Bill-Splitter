@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
+import java.util.ArrayList;
+
 /**
  * Created by ryana on 3/4/2016.
  */
@@ -18,10 +20,21 @@ public class MealCheckAdapter extends RecyclerView.Adapter<MealCheckAdapter.Meal
         this.ma = ma;
         this.listener = listener;
         status = new boolean[ma.getItemCount()];
+    }
+
+    public void setMeals(ArrayList<Meal> meals) {
         for(int i = 0; i < ma.getItemCount(); i++) {
-            status[i] = p.hasMeal(ma.get(i).getName());
+            status[i] = false;
+            for(Meal m : meals) {
+                if (ma.get(i) == m) {
+                    status[i] = true;
+                    break;
+                }
+            }
+            notifyItemChanged(i);
         }
     }
+
     @Override
     public MealCheckHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.meal_check,null);

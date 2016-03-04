@@ -16,17 +16,21 @@ public class PersonCheckAdapter extends RecyclerView.Adapter<PersonCheckAdapter.
     private boolean[] status;
     private EditMealActivity.OnClickListener listener;
 
-    public PersonCheckAdapter(Meal m, PersonAdapter pa, EditMealActivity.OnClickListener listener) {
-        Person[] people = MainActivity.instance.getPersonsFor(m);
-        ArrayList<Person> persons = new ArrayList<Person>();
-        for( Person p: people) {
-            persons.add(p);
-        }
+    public PersonCheckAdapter(PersonAdapter pa, EditMealActivity.OnClickListener listener) {
         this.pa = pa;
         this.listener = listener;
         status = new boolean[pa.getItemCount()];
-        for(int i = 0; i < pa.getItemCount(); i++ ) {
-            status[i] = pa.get(i).hasMeal(m.getName());
+    }
+
+    public void setList(ArrayList<Person> list) {
+        for(int i = 0; i < pa.getItemCount(); i++) {
+            status[i] = false;
+            for(Person p : list) {
+                if( p == pa.get(i)) {
+                    status[i] = true;
+                    break;
+                }
+            }
         }
     }
 

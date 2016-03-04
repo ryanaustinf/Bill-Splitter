@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class EditPersonActivity extends AppCompatActivity {
+    private static ArrayList<Meal> LIST = null;
     private Button backButton;
     private Button saveButton;
     private Button deleteButton;
@@ -87,10 +88,15 @@ public class EditPersonActivity extends AppCompatActivity {
         cashField.setText(p.getCashTendered() + "");
 
         MealAdapter ma = MainActivity.instance.getMealAdapter();
-        for(int i = 0; i < ma.getItemCount(); i++ ) {
-            if( p.hasMeal(ma.get(i).getName()) ) {
-                meals.add(ma.get(i));
+
+        if( LIST == null ) {
+            for (int i = 0; i < ma.getItemCount(); i++) {
+                if (p.hasMeal(ma.get(i).getName())) {
+                    meals.add(ma.get(i));
+                }
             }
+        } else {
+            meals = LIST;
         }
 
         mca = new MealCheckAdapter(p,ma, new OnClickListener() {
@@ -107,10 +113,17 @@ public class EditPersonActivity extends AppCompatActivity {
                 }
             }
         });
+        mca.setMeals(meals);
 
         mealView.setAdapter(mca);
         mealView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LIST = meals;
     }
 
     public interface OnClickListener {

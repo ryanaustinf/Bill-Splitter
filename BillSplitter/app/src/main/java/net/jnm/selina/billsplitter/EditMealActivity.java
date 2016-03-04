@@ -13,6 +13,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class EditMealActivity extends AppCompatActivity {
+    private static ArrayList<Person> LIST;
+
     private Button backButton;
     private Button saveButton;
     private Button deleteButton;
@@ -40,10 +42,14 @@ public class EditMealActivity extends AppCompatActivity {
         quantityField = (EditText)findViewById(R.id.quantityField);
         personView = (RecyclerView)findViewById(R.id.personView);
 
-        persons = new ArrayList<Person>();
-        Person[] list = MainActivity.instance.getPersonsFor(m);
-        for(Person p : list) {
-            persons.add(p);
+        if( LIST == null ) {
+            persons = new ArrayList<Person>();
+            Person[] list = MainActivity.instance.getPersonsFor(m);
+            for (Person p : list) {
+                persons.add(p);
+            }
+        } else {
+            persons = LIST;
         }
 
         nameField.setText(m.getName());
@@ -76,6 +82,9 @@ public class EditMealActivity extends AppCompatActivity {
                                     for (Person p : persons) {
                                         p.addPayment(m);
                                     }
+                                    m.setName(name);
+                                    m.setPrice(price);
+                                    m.setQuantity(quantity);
                                     finish();
                                 } else {
                                     Toast.makeText(getBaseContext(),"Quantity must be a positive integer."
@@ -104,7 +113,7 @@ public class EditMealActivity extends AppCompatActivity {
             }
         });
 
-        pca = new PersonCheckAdapter(m, MainActivity.instance.getPersonAdapter()
+        pca = new PersonCheckAdapter(MainActivity.instance.getPersonAdapter()
                                         , new OnClickListener() {
             @Override
             public void onClick(Person p, boolean checked) {
@@ -119,8 +128,15 @@ public class EditMealActivity extends AppCompatActivity {
                 }
             }
         });
+        pca.setList(persons);
         personView.setAdapter(pca);
         personView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LIST = persons;
     }
 
     public interface OnClickListener {

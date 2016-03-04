@@ -23,6 +23,10 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonHold
         listener = onClickListener;
     }
 
+    public void setListener(MainActivity.OnClickListener listener) {
+        this.listener = listener;
+    }
+
     @Override
     public PersonHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.person_view,null);

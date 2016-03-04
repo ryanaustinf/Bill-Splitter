@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i("MainActivity", "Saving shit");
         MA = ma;
         PA = pa;
     }

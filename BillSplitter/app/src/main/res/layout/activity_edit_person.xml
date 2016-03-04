@@ -13,18 +13,21 @@
         android:layout_height="wrap_content"
         android:text="Back"
         android:id="@+id/backButton"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/saveButton"
         android:layout_toLeftOf="@id/backButton"
+        android:layout_toStartOf="@id/backButton"
         android:text="Save" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/deleteButton"
         android:layout_toLeftOf="@id/saveButton"
+        android:layout_toStartOf="@id/saveButton"
         android:text="Delete" />
     <EditText
         android:layout_width="match_parent"

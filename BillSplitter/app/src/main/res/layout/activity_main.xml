@@ -19,11 +19,13 @@
             android:layout_height="wrap_content"
             android:text="Edit Meals"
             android:id="@+id/mealButton"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/addButton"
+            android:layout_toStartOf="@id/mealButton"
             android:layout_toLeftOf="@id/mealButton"
             android:text="Add Person"/>
         <EditText
@@ -39,7 +41,10 @@
         <TextView
             app:layout_widthPercent="33%"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:paddingStart="0dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="10dp"
             android:paddingEnd="10dp"
             android:text="Amount Due"
             android:id="@+id/cashLabel"
@@ -47,20 +52,28 @@
         <TextView
             app:layout_widthPercent="33%"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:paddingStart="0dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="10dp"
             android:paddingEnd="10dp"
             android:id="@+id/tenderLabel"
             android:text="Cash Tendered"
             android:layout_toRightOf="@id/cashLabel"
+            android:layout_toEndOf="@id/cashLabel"
             android:textStyle="bold"/>
         <TextView
             app:layout_widthPercent="33%"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:paddingStart="0dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="10dp"
             android:paddingEnd="10dp"
             android:id="@+id/changeLabel"
             android:text="Change Due"
             android:layout_toRightOf="@id/tenderLabel"
+            android:layout_toEndOf="@id/tenderLabel"
             android:textStyle="bold"/>
     </android.support.percent.PercentRelativeLayout>
     <android.support.v7.widget.RecyclerView

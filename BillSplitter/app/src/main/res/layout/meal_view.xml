@@ -17,26 +17,40 @@
             app:layout_widthPercent="33%"
             android:layout_height="wrap_content"
             android:id="@+id/unitPriceLabel"
-            android:textAlignment="textEnd"
-            android:paddingEnd="10dp"/>
+            android:gravity="end"
+            android:paddingLeft="0dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="10dp"
+            android:paddingRight="10dp"/>
         <TextView
             app:layout_widthPercent="16%"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/unitPriceLabel"
+            android:layout_toRightOf="@id/unitPriceLabel"
             android:id="@+id/quantityLabel"
-            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:paddingLeft="0dp"
+            android:paddingStart="0dp"
+            android:paddingRight="10dp"
             android:paddingEnd="10dp"/>
         <TextView
             app:layout_widthPercent="45%"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/quantityLabel"
+            android:layout_toRightOf="@id/quantityLabel"
             android:id="@+id/totalPriceLabel"
-            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:paddingLeft="0dp"
+            android:paddingStart="0dp"
+            android:paddingRight="10dp"
             android:paddingEnd="10dp"/>
     </android.support.percent.PercentRelativeLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/peopleLabel"
-        android:paddingLeft="15dp"/>
+        android:paddingStart="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp" />
 </LinearLayout>

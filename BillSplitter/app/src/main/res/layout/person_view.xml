@@ -18,22 +18,36 @@
         <TextView
             app:layout_widthPercent="33%"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
-            android:id="@+id/cashLabel"
-            android:paddingEnd="10dp"/>
+            android:gravity="end"
+            android:layout_gravity="end"
+            android:paddingLeft="0dp"
+            android:paddingStart="0dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
+            android:id="@+id/cashLabel" />
         <TextView
             app:layout_widthPercent="33%"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:layout_gravity="end"
+            android:paddingLeft="0dp"
+            android:paddingStart="0dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
             android:id="@+id/tenderLabel"
-            android:layout_toRightOf="@id/cashLabel"
-            android:paddingEnd="10dp"/>
+            android:layout_toEndOf="@id/cashLabel"
+            android:layout_toRightOf="@id/cashLabel"/>
         <TextView
             app:layout_widthPercent="33%"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:layout_gravity="end"
+            android:paddingLeft="0dp"
+            android:paddingStart="0dp"
+            android:paddingRight="10dp"
+            android:paddingEnd="10dp"
             android:id="@+id/changeLabel"
-            android:layout_toRightOf="@id/tenderLabel"
-            android:paddingEnd="10dp"/>
+            android:layout_toEndOf="@id/tenderLabel"
+            android:layout_toRightOf="@id/tenderLabel"/>
     </android.support.percent.PercentRelativeLayout>
 </LinearLayout>

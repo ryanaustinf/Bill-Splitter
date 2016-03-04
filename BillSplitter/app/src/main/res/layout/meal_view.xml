@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/mealPanel">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:id="@+id/mealLabel"/>
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            app:layout_widthPercent="33%"
+            android:layout_height="wrap_content"
+            android:id="@+id/unitPriceLabel"
+            android:textAlignment="textEnd"
+            android:paddingEnd="10dp"/>
+        <TextView
+            app:layout_widthPercent="16%"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/unitPriceLabel"
+            android:id="@+id/quantityLabel"
+            android:textAlignment="textEnd"
+            android:paddingEnd="10dp"/>
+        <TextView
+            app:layout_widthPercent="45%"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/quantityLabel"
+            android:id="@+id/totalPriceLabel"
+            android:textAlignment="textEnd"
+            android:paddingEnd="10dp"/>
+    </android.support.percent.PercentRelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/peopleLabel"
+        android:paddingLeft="15dp"/>
+</LinearLayout>

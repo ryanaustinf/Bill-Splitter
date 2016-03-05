@@ -12,10 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/unitPriceField"
-        android:hint="Unit Price"/>
+        android:hint="Unit Price"
+        android:inputType="numberDecimal"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/quantityField"
-        android:hint="Quantity"/>
+        android:hint="Quantity"
+        android:inputType="number"/>
 </LinearLayout>

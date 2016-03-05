@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class EditPersonActivity extends AppCompatActivity {
@@ -20,17 +22,22 @@ public class EditPersonActivity extends AppCompatActivity {
     private EditText nameField;
     private EditText cashField;
     private RecyclerView mealView;
+    private TextView totalPriceLabel;
+    private boolean isFinish;
 
     private Person p;
     private MealCheckAdapter mca;
     private ArrayList<Meal> meals;
+    private DecimalFormat df;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_person);
+        isFinish = false;
 
         p = MainActivity.instance.getActive();
+        Log.i("EditPersonActivity","Active Person: " + p.getName());
 
         backButton = (Button)findViewById(R.id.backButton);
         saveButton = (Button)findViewById(R.id.saveButton);
@@ -38,12 +45,13 @@ public class EditPersonActivity extends AppCompatActivity {
         nameField = (EditText)findViewById(R.id.nameField);
         cashField = (EditText)findViewById(R.id.cashField);
         mealView = (RecyclerView)findViewById(R.id.mealView);
+        totalPriceLabel = (TextView)findViewById(R.id.totalPriceLabel);
         meals = new ArrayList<Meal>();
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                isFinish = true; finish();
             }
         });
 
@@ -64,6 +72,7 @@ public class EditPersonActivity extends AppCompatActivity {
                             }
                             p.setName(name);
                             p.setCashTendered(cash);
+                            isFinish = true;
                             finish();
                         }
                     } catch( NumberFormatException nfe) {
@@ -80,6 +89,7 @@ public class EditPersonActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.instance.deleteActive();
+                isFinish = true;
                 finish();
             }
         });
@@ -99,6 +109,10 @@ public class EditPersonActivity extends AppCompatActivity {
             meals = LIST;
         }
 
+        df = new DecimalFormat();
+        df.setMinimumFractionDigits(2);
+        df.setMaximumFractionDigits(2);
+
         mca = new MealCheckAdapter(p,ma, new OnClickListener() {
             @Override
             public void onClick(Meal m, boolean selected) {
@@ -111,6 +125,7 @@ public class EditPersonActivity extends AppCompatActivity {
                         meals.remove(m);
                     }
                 }
+                totalPriceLabel.setText("Php " + df.format(mca.getTotal()));
             }
         });
         mca.setMeals(meals);
@@ -118,12 +133,23 @@ public class EditPersonActivity extends AppCompatActivity {
         mealView.setAdapter(mca);
         mealView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
 
+        totalPriceLabel.setText("Php " + df.format(mca.getTotal()));
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        LIST = null;
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LIST = meals;
+        if( !isFinish ) {
+            LIST = meals;
+        } else {
+            LIST = null;
+        }
     }
 
     public interface OnClickListener {

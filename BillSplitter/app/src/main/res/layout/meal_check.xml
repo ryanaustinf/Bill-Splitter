@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp">
@@ -8,4 +8,18 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:id="@+id/mealCheckBox"/>
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/priceLabel"
+        android:text="Php 0.00"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:paddingEnd="20dp"
+        android:paddingRight="20dp"
+        android:paddingStart="0dp"
+        android:paddingLeft="0dp"
+        android:textSize="20sp"
+        android:gravity="end"
+        android:layout_alignBottom="@id/mealCheckBox"/>
+</RelativeLayout>

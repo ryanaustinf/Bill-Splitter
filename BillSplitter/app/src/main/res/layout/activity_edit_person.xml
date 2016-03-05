@@ -1,50 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="net.jnm.selina.billsplitter.EditPersonActivity">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:id="@+id/backButton"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/saveButton"
-        android:layout_toLeftOf="@id/backButton"
-        android:layout_toStartOf="@id/backButton"
-        android:text="Save" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/deleteButton"
-        android:layout_toLeftOf="@id/saveButton"
-        android:layout_toStartOf="@id/saveButton"
-        android:text="Delete" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:id="@+id/backButton"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/saveButton"
+            android:layout_toLeftOf="@id/backButton"
+            android:layout_toStartOf="@id/backButton"
+            android:text="Save" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/deleteButton"
+            android:layout_toLeftOf="@id/saveButton"
+            android:layout_toStartOf="@id/saveButton"
+            android:text="Delete" />
+    </RelativeLayout>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/nameField"
-        android:layout_below="@id/backButton"
         android:hint="Name"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/cashField"
-        android:hint="Cash Tendered"
-        android:layout_below="@id/nameField"/>
+        android:hint="Cash Tendered"/>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/mealView"
-        android:layout_below="@id/cashField">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/mealView">
     </android.support.v7.widget.RecyclerView>
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Total"
+            android:id="@+id/totalLabel"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/totalPriceLabel"
+            android:gravity="end"
+            android:paddingLeft="0dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="10dp"
+            android:paddingRight="10dp"
+            android:textSize="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/totalLabel"/>
+    </RelativeLayout>
+</LinearLayout>

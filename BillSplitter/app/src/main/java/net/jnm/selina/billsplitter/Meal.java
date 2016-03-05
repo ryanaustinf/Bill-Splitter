@@ -62,4 +62,6 @@ public class Meal {
     public void decrease() {
         people--;
     }
+
+    public int getCount() { return people; }
 }

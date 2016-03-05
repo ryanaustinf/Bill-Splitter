@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
+import android.widget.TextView;
+
+import java.text.DecimalFormat;
 
 public class ManageMealsActivity extends AppCompatActivity {
     public static ManageMealsActivity instance;
@@ -16,9 +19,11 @@ public class ManageMealsActivity extends AppCompatActivity {
     private Button backButton;
     private Button addButton;
     private RecyclerView mealView;
+    private TextView totalPriceLabel;
 
     private Meal activeMeal;
     private PersonCheckAdapter pca;
+    private DecimalFormat df;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class ManageMealsActivity extends AppCompatActivity {
         backButton = (Button)findViewById(R.id.backButton);
         addButton = (Button)findViewById(R.id.addButton);
         mealView = (RecyclerView)findViewById(R.id.mealView);
+        totalPriceLabel = (TextView)findViewById(R.id.totalPriceLabel);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +65,11 @@ public class ManageMealsActivity extends AppCompatActivity {
 
         mealView.setAdapter(ma);
         mealView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+
+        df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+        df.setMinimumFractionDigits(2);
+        setTotal();
     }
 
     @Override
@@ -77,7 +88,16 @@ public class ManageMealsActivity extends AppCompatActivity {
     }
 
     public void addMeal(String name, double unitPrice, int quantity) {
-        ma.addMeal(name,unitPrice,quantity);
+        ma.addMeal(name, unitPrice, quantity);
+        setTotal();
+    }
+
+    private void setTotal() {
+        double total = 0;
+        for(int i = 0; i < ma.getItemCount(); i++) {
+            total += ma.get(i).getTotalPrice();
+        }
+        totalPriceLabel.setText("Php " + df.format(total));
     }
 
     public interface OnClickListener {

@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,11 +24,16 @@ public class MainActivity extends AppCompatActivity {
     private Button addButton;
     private EditText personNameField;
     private RecyclerView personView;
+    private TextView totalCashLabel;
+    private TextView totalTenderLabel;
+    private TextView totalChangeLabel;
 
     private MealAdapter ma;
     private PersonAdapter pa;
 
     private Person activePerson;
+
+    private DecimalFormat df;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         addButton = (Button)findViewById(R.id.addButton);
         personNameField = (EditText)findViewById(R.id.personNameField);
         personView = (RecyclerView)findViewById(R.id.personView);
+        totalCashLabel = (TextView)findViewById(R.id.totalCashLabel);
+        totalTenderLabel = (TextView)findViewById(R.id.totalTenderLabel);
+        totalChangeLabel = (TextView)findViewById(R.id.totalChangeLabel);
 
         ma = MA;
         pa = PA;
@@ -67,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         mealButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mealIntent = new Intent(getBaseContext(),ManageMealsActivity.class);
+                Intent mealIntent = new Intent(getBaseContext(), ManageMealsActivity.class);
                 startActivity(mealIntent);
             }
         });
@@ -76,14 +86,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = personNameField.getText().toString();
-                if(name.length() > 0 ){
+                if (name.length() > 0) {
                     pa.addPerson(name);
                     personNameField.setText("");
                 } else {
-                    Toast.makeText(getBaseContext(),"Please input a name",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "Please input a name", Toast.LENGTH_LONG).show();
                 }
             }
         });
+        df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+        df.setMinimumFractionDigits(2);
+
     }
 
     @Override
@@ -129,6 +143,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         pa.updateGUI();
+        double cost = 0, tender = 0, change = 0;
+        for(int i = 0; i < pa.getItemCount(); i++) {
+            cost += pa.get(i).getPayment();
+            tender += pa.get(i).getCashTendered();
+            change += pa.get(i).getChange();
+        }
+        totalCashLabel.setText("Php " + df.format(cost));
+        totalTenderLabel.setText("Php " + df.format(tender));
+        totalChangeLabel.setText("Php " + df.format(change));
     }
 
     public interface OnClickListener {

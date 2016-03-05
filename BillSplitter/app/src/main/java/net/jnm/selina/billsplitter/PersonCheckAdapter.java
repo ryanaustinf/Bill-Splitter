@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -55,13 +56,15 @@ public class PersonCheckAdapter extends RecyclerView.Adapter<PersonCheckAdapter.
         private Person p;
         private CheckBox personCheckBox;
 
-        public PersonCheckHolder(View itemView) {
+        public PersonCheckHolder(final View itemView) {
             super(itemView);
             personCheckBox = (CheckBox)itemView.findViewById(R.id.mealCheckBox);
+            ((TextView)itemView.findViewById(R.id.priceLabel)).setText("");
             personCheckBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.onClick(p,personCheckBox.isChecked());
+                    status[getAdapterPosition()] = personCheckBox.isChecked();
                 }
             });
         }

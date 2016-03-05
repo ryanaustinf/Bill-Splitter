@@ -23,6 +23,7 @@ public class EditMealActivity extends AppCompatActivity {
     private EditText quantityField;
     private RecyclerView personView;
 
+    private boolean isFinish;
     private Meal m;
     private ArrayList<Person> persons;
     private PersonCheckAdapter pca;
@@ -32,6 +33,7 @@ public class EditMealActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_meal);
 
+        isFinish = false;
         m = ManageMealsActivity.instance.getActive();
 
         backButton = (Button)findViewById(R.id.backButton);
@@ -59,6 +61,7 @@ public class EditMealActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isFinish = true;
                 finish();
             }
         });
@@ -85,6 +88,7 @@ public class EditMealActivity extends AppCompatActivity {
                                     m.setName(name);
                                     m.setPrice(price);
                                     m.setQuantity(quantity);
+                                    isFinish = true;
                                     finish();
                                 } else {
                                     Toast.makeText(getBaseContext(),"Quantity must be a positive integer."
@@ -109,6 +113,7 @@ public class EditMealActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ManageMealsActivity.instance.deleteActive();
+                isFinish = true;
                 finish();
             }
         });
@@ -136,7 +141,11 @@ public class EditMealActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LIST = persons;
+        if( isFinish ) {
+            LIST = null;
+        } else {
+            LIST = persons;
+        }
     }
 
     public interface OnClickListener {

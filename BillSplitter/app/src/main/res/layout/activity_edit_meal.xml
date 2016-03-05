@@ -46,14 +46,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/priceField"
             android:hint="Unit Price"
-            android:layout_below="@id/nameField"/>
+            android:layout_below="@id/nameField"
+            android:inputType="numberDecimal"/>
         <EditText
             app:layout_widthPercent="35%"
             android:layout_height="wrap_content"
             android:id="@+id/quantityField"
             android:hint="Quantity"
             android:layout_toEndOf="@id/priceField"
-            android:layout_toRightOf="@id/priceField"/>
+            android:layout_toRightOf="@id/priceField"
+            android:inputType="number"/>
     </android.support.percent.PercentRelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

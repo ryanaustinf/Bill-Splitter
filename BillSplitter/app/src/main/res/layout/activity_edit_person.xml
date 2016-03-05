@@ -44,7 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/cashField"
-        android:hint="Cash Tendered"/>
+        android:hint="Cash Tendered"
+        android:inputType="numberDecimal"/>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
